@@ -1,0 +1,84 @@
+
+get the documentation
+
+--> { action: 'get',
+  resource: [],
+  accept: { meaning: 'document', encoding: 'text' } }
+
+<-- { status: 'ok',
+  type: { meaning: 'document', encoding: 'text' } }
+
+Addition as a service
+
+get  []              - this document
+post ["nums"]        - add number to list in storage
+get  ["nums"]        - retreive list of numbers from storage
+get  ["nums", "sum"] - retreive sum of numbers in said list
+
+---
+
+add a number
+
+--> { action: 'post',
+  resource: [ 'nums' ],
+  body: '1',
+  type: { meaning: 'number', encoding: 'csv' },
+  accept: { meaning: 'number', encoding: 'csv' } }
+
+<-- { status: 'ok', type: { meaning: 'number', encoding: 'csv' } }
+
+1
+
+---
+
+add another number
+
+--> { action: 'post',
+  resource: [ 'nums' ],
+  body: '2',
+  type: { meaning: 'number', encoding: 'csv' },
+  accept: { meaning: 'number', encoding: 'csv' } }
+
+<-- { status: 'ok', type: { meaning: 'number', encoding: 'csv' } }
+
+2
+
+---
+
+get the list of the two numbers
+
+--> { action: 'get',
+  resource: [ 'nums' ],
+  accept: { meaning: 'number-list', encoding: 'csv' } }
+
+<-- { status: 'ok', type: { meaning: 'numbers', encoding: 'csv' } }
+
+1,2
+
+---
+
+get the sum of the two numbers
+
+--> { action: 'get',
+  resource: [ 'nums', 'sum' ],
+  accept: { meaning: 'number', encoding: 'csv' } }
+
+<-- { status: 'ok', type: { meaning: 'number', encoding: 'csv' } }
+
+3
+
+---
+
+get a resource that doesn't exist
+
+--> { action: 'get',
+  resource: [ 'pants', 'shoes' ],
+  accept: { meaning: 'number', encoding: 'csv' } }
+
+<-- { status: 'not found',
+  type: { meaning: 'document', encoding: 'text' } }
+
+Nothing found, see root resource for documentation
+
+---
+
